@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Building BeagleBone Application..."
+g++ -std=c++17 ../../Programs/BeagleCPP/Sources/RAINBOWCOLORS.cpp ../../Programs/BeagleCPP/Sources/SYSFILEACCESS.cpp ../../Programs/BeagleCPP/Sources/MISCELLANEOUS.cpp ../../Programs/BeagleCPP/Sources/GPIO.cpp ../../Programs/BeagleCPP/Sources/LED.cpp ../../Programs/BeagleCPP/Sources/ADC.cpp ../../Programs/BeagleCPP/Sources/PWM.cpp ../../Programs/BeagleCPP/Sources/HC_SR04.cpp ../../Programs/BeagleCPP/Sources/KEYPAD_5BUTTONS.cpp ../../Programs/BeagleCPP/Sources/SERVO.cpp ../../Programs/BeagleCPP/Sources/DCMOTOR.cpp ../../Programs/BeagleCPP/Sources/TB6612FNG.cpp ThunderRobot.cpp -lpthread -o ThunderRobot.out -Wno-psabi
+echo "Finished"
