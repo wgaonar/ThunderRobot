@@ -124,40 +124,28 @@ int main()
   // Activate the module
   myTB6612FNGModule.Activate();
 
-  message = "If you want to stop the program, enter 'y' for yes";
-  cout << RainbowText(message, "Yellow") << endl;
-  message = "Or enter 'w' to move forward 's' to move to backward";
-  cout << RainbowText(message, "Yellow") << endl;
-  message = "Or enter 'a' to move to the left or 'd' to move to the right";
-  cout << RainbowText(message, "Yellow") << endl;
-
   int motorSpeed = 100;
-  char userInput = '\0';
-  while (userInput != 'y')
+  for (auto movement : movements)
   {
-    message = "Enter an option 'y', 'w', 's', 'a', 'd': ";
-    cout << RainbowText(message, "Yellow");
-    cin >> userInput;
-
-    // Update the motors speed and move the motors in 4 directions
-    switch (userInput)
+    // Move the robot according to the movement in the vector
+    switch (movement)
     {
-    case 'w':
-      myTB6612FNGModule.Forward(motorSpeed);
+    case FORWARD:
+      myTB6612FNGModule.Forward(motorSpeed,1000);
       break;
-    case 's':
-      myTB6612FNGModule.Backward(motorSpeed);
+    case BACKWARD:
+      myTB6612FNGModule.Backward(motorSpeed,1000);
       break;
-    case 'a':
-      myTB6612FNGModule.TurnLeft(motorSpeed);
+    case LEFT:
+      myTB6612FNGModule.TurnLeft(motorSpeed,1000);
       break;
-    case 'd':
-      myTB6612FNGModule.TurnRight(motorSpeed);
+    case RIGHT:
+      myTB6612FNGModule.TurnRight(motorSpeed,1000);
       break;
     default:
       break;
     }
-  }  
+  }
 
   // Brake the motors
   cout << "Breaking the motors...\n";
