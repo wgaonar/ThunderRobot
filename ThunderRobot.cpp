@@ -11,7 +11,7 @@ Class: TB6612FNG
 #include "../../Programs/BeagleCPP/Sources/HC_SR04.h"
 #include "../../Programs/BeagleCPP/Sources/KEYPAD_5BUTTONS.h"
 #include "../../Programs/BeagleCPP/Sources/TB6612FNG.h"
-#include "../../Programs/BeagleCPP/Sources/SERVO.h"
+#include "../../Programs/BeagleCPP/Sources/POSITION_SERVO.h"
 
 using namespace std;
 
@@ -76,8 +76,8 @@ TB6612FNG myTB6612FNGModule (MotorLeft, MotorRight, standByPin);
 
 /*===========================================================================*/
 // Servomotor SG90
-// Declare the Servo object
-SERVO myServo(P9_14);
+// Declare the POSITION_SERVO object
+POSITION_SERVO myServo(P9_14);
 /*===========================================================================*/
 
 int main()
