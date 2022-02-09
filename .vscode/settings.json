@@ -2,5 +2,9 @@
   "cmake.configureOnOpen": false,
   "files.associations": {
     "iostream": "cpp"
-  }
+  },
+  "cSpell.words": [
+    "PWMA",
+    "Vout"
+  ]
 }
