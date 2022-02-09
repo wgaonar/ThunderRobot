@@ -85,12 +85,12 @@ int main()
   string message = "Main program starting here...";
   cout << RainbowText(message,"Blue", "White", "Bold") << endl;
 
-  cout << "Measuring the distance to ground\n";
+  cout << "\nMeasuring the distance to ground\n";
   double distanceToGround {distanceSensorToGround.MeasureDistanceCmWithMedian()};
   cout << "Distance to ground: " << distanceToGround << "cm\n";
   DelayMilliseconds(250);
 
-  cout << "Making a sonar sweep to measure the distance to surroundings\n";
+  cout << "\nMaking a sonar sweep to measure the distance to surroundings\n";
   int sonarPositions[5] {5, 45, 95, 140, 180}; 
   for (int i = 0; i < 5; i++)
   {
@@ -106,7 +106,7 @@ int main()
   DelayMilliseconds(1000);
 
 
-  cout  << "Please, enter the desired movement sequence with the keypad"
+  cout  << "\nPlease, enter the desired movement sequence with the keypad"
         << "White bottom to execute them\n";
   command = myKeyPad.ReadPushedButton();
   while (command != GO)
@@ -117,7 +117,7 @@ int main()
     command = myKeyPad.ReadPushedButton();
   }
 
-  cout << "The entered sequence of movements was: \n";
+  cout << "\nThe entered sequence of movements was: \n";
   for (int index = 0; index < movements.size(); ++index)
   {
     cout << "Movement[" << index << "] = ";
@@ -126,30 +126,40 @@ int main()
           << endl;
   }
 
-  cout << "Moving the ThunderRobot...\n";
+  cout << "\nMoving the ThunderRobot...\n";
   // Activate the module
   myTB6612FNGModule.Activate();
 
   int motorSpeed = 100;
   for (auto movement : movements)
   {
-    // Move the robot according to the movement in the vector
-    switch (movement)
+    // Check the distance to ground
+    distanceToGround = distanceSensorToGround.MeasureDistanceCmWithMedian();
+    if (distanceToGround < 7.5)
     {
-    case FORWARD:
-      myTB6612FNGModule.Forward(motorSpeed,1000);
-      break;
-    case BACKWARD:
-      myTB6612FNGModule.Backward(motorSpeed,1000);
-      break;
-    case LEFT:
-      myTB6612FNGModule.TurnLeft(motorSpeed,1000);
-      break;
-    case RIGHT:
-      myTB6612FNGModule.TurnRight(motorSpeed,1000);
-      break;
-    default:
-      break;
+      // Move the robot according to the movement in the vector
+      switch (movement)
+      {
+      case FORWARD:
+        myTB6612FNGModule.Forward(motorSpeed,1000);
+        break;
+      case BACKWARD:
+        myTB6612FNGModule.Backward(motorSpeed,1000);
+        break;
+      case LEFT:
+        myTB6612FNGModule.TurnLeft(motorSpeed,1000);
+        break;
+      case RIGHT:
+        myTB6612FNGModule.TurnRight(motorSpeed,1000);
+        break;
+      default:
+        break;
+      }
+    }
+    else
+    {
+      cout << "The ThunderRobot is on the edge, moving backward\n";
+      myTB6612FNGModule.Backward(motorSpeed,250);
     }
   }
 
