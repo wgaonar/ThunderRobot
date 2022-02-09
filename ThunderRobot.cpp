@@ -85,24 +85,29 @@ int main()
   string message = "Main program starting here...";
   cout << RainbowText(message,"Blue", "White", "Bold") << endl;
 
-  double distanceToGround = distanceSensorToGround.MeasureDistanceCmWithMedian();
+  cout << "Measuring the distance to ground\n";
+  double distanceToGround {distanceSensorToGround.MeasureDistanceCmWithMedian()};
   cout << "Distance to ground: " << distanceToGround << "cm\n";
   DelayMilliseconds(250);
 
-  int sonarPositions[5] = {5, 45, 95, 140, 180}; 
-
+  cout << "Making a sonar sweep to measure the distance to surroundings\n";
+  int sonarPositions[5] {5, 45, 95, 140, 180}; 
   for (int i = 0; i < 5; i++)
   {
     myServo.SetAngle(sonarPositions[i]);
-    DelayMilliseconds(750);  // Wait 750ms for the servo to reach the position
+    // Wait 1000ms for the servo to reach the position
+    DelayMilliseconds(1000);  
     double distanceToFront = distanceSensorToFront.MeasureDistanceCmWithMedian();
     cout << "Distance to front: " << distanceToFront << "cm\n";
-    DelayMilliseconds(250);
   }
 
   myServo.SetAngle(95);
-  DelayMilliseconds(750);  // Wait 750ms for the servo to reach the position
-  
+  // Wait 1000ms for the servo to reach the center position
+  DelayMilliseconds(1000);
+
+
+  cout  << "Please, enter the desired movement sequence with the keypad"
+        << "White bottom to execute them\n";
   command = myKeyPad.ReadPushedButton();
   while (command != GO)
   {
@@ -121,6 +126,7 @@ int main()
           << endl;
   }
 
+  cout << "Moving the ThunderRobot...\n";
   // Activate the module
   myTB6612FNGModule.Activate();
 
