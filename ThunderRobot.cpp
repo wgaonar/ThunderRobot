@@ -5,7 +5,6 @@ ThunderRobot.cpp
 
 - Control of a mobile robot
 
-Class: TB6612FNG
 ******************************************************************************/
 #include <iostream>
 #include "../../Programs/BeagleCPP/Sources/HC_SR04.h"
