@@ -42,6 +42,9 @@ PWM PWMB {P8_19};
 
 // Declare the MotorB
 DCMotor MotorRight {BIN1, BIN2, PWMB};
+
+// Declare the TB6612FNG Module
+TB6612FNG myTB6612FNGModule (MotorLeft, MotorRight, standByPin);
 /*===========================================================================*/
 
 /*=========================POSITION_SERVO SETUP==============================*/
