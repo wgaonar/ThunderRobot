@@ -167,6 +167,29 @@ void ThunderRobot::Move (std::string movement, int speed, int duration)
   }
 }
 
+/*
+  Interface method to turn 90° degrees the robot to the left or right
+  @param string direction: The desired turn direction
+  @param int degree: The desired speed (0,180) with <90> as default value.
+*/
+void ThunderRobot::Turn90Degrees( std::string direction, int degrees)
+{
+  if (direction == "left")
+  {
+    std::cout << "\nTurning the robot " << degrees << "° to left\n";
+    myTB6612FNGModule.TurnRight(100,1500);
+  }
+  else if (direction == "right")
+  {
+    std::cout << "\nTurning the robot " << degrees << "° to right\n";
+    myTB6612FNGModule.TurnLeft(100,1500);
+  }
+  else
+  {
+    myTB6612FNGModule.Idle();
+  }
+}
+
 // Destructor
 ThunderRobot::~ThunderRobot() 
 {

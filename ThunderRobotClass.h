@@ -5,7 +5,6 @@
 #include "../../Programs/BeagleCPP/Sources/KEYPAD_5BUTTONS.h"
 #include "../../Programs/BeagleCPP/Sources/TB6612FNG.h"
 #include "../../Programs/BeagleCPP/Sources/POSITION_SERVO.h"
-// #include "Configuration.h"
 
 class ThunderRobot
 {
@@ -38,10 +37,11 @@ public:
   // Interface method to get the distance to left
   double virtual GetDistanceToLeft();
 
-  // Interface method to do a sweep to get distance at different angles
-   
   // Interface method to move the robot to forward
   virtual void Move (std::string movement, int speed = 50, int duration = 1000);
+
+  // Interface method to turn by degrees the robot
+  virtual void Turn90Degrees( std::string direction, int degrees = 90);
 
   // Destructor
   ~ThunderRobot();

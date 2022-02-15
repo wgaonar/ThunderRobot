@@ -47,6 +47,8 @@ int main()
   myRobot.Move("left", motorSpeed, 1000);
   myRobot.Move("right", motorSpeed, 1000);
 
+  myRobot.Turn90Degrees("left");
+
   message = "Main program finishes here...";
   cout << RainbowText(message,"Blue", "White","Bold") << endl;
 
