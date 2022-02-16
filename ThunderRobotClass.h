@@ -37,11 +37,14 @@ public:
   // Interface method to get the distance to left
   double virtual GetDistanceToLeft();
 
+  // Interface method to get the pressed Button from the Keypad
+  COMMAND virtual GetKeyPadButton();
+
   // Interface method to move the robot to forward
   virtual void Move (std::string movement, int speed = 50, int duration = 1000);
 
   // Interface method to turn by degrees the robot
-  virtual void Turn90Degrees( std::string direction, int degrees = 90);
+  virtual void Turn90Degrees( std::string direction);
 
   // Destructor
   ~ThunderRobot();
