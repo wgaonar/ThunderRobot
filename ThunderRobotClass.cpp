@@ -183,7 +183,7 @@ void ThunderRobot::Turn90Degrees( std::string direction)
   if (direction == "left")
   {
     std::cout << "\nTurning the robot 90° to left\n";
-    this->myTB6612FNGModule.TurnLeft(100,3000);
+    this->myTB6612FNGModule.TurnLeft(100,3200);
   }
   else if (direction == "right")
   {
