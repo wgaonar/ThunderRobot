@@ -169,7 +169,7 @@ void ThunderRobot::Move (std::string movement, int speed, int duration)
   @param int duration:  The desired duration in milliseconds with <1000> as
                         default value.
 */
-void ThunderRobot::Move (std::string movement, int speed, int duration)
+void ThunderRobot::Turn (std::string movement, int speed, int duration)
 {
   // Check the distance to ground
   if (this->GetDistanceToGround() < 7.5)
