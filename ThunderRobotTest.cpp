@@ -44,8 +44,9 @@ int main()
   int motorSpeed {100};
   myRobot.Move("forward", motorSpeed, 1000);
   myRobot.Move("backward", motorSpeed, 1000);
-  myRobot.Move("left", motorSpeed, 1000);
-  myRobot.Move("right", motorSpeed, 1000);
+  
+  myRobot.Turn("left", motorSpeed, 1000);
+  myRobot.Turn("right", motorSpeed, 1000);
 
   myRobot.Turn90Degrees("left");
   myRobot.Turn90Degrees("right");

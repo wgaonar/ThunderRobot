@@ -128,7 +128,7 @@ COMMAND ThunderRobot::GetKeyPadButton()
 }
 
 /*
-  Interface method to move the robot in one of the main 4 directions
+  Interface method to move the robot forward / backward
   @param string movement: The desired direction
   @param int speed: The desired speed (0,100) with <50> as default value.
   @param int duration:  The desired duration in milliseconds with <1000> as
@@ -139,7 +139,7 @@ void ThunderRobot::Move (std::string movement, int speed, int duration)
   // Check the distance to ground
   if (this->GetDistanceToGround() < 7.5)
   {
-    // Move the robot according to the movement in the vector
+    // Move the robot
     if (movement == "forward")
     {
       std::cout << "\nMoving the Robot to forward with a speed of: " 
@@ -152,7 +152,30 @@ void ThunderRobot::Move (std::string movement, int speed, int duration)
                 << speed << "\% " << "by: " << duration << " ms\n";
       this->myTB6612FNGModule.Backward(speed, duration);
     }
-    else if (movement == "left")
+    else
+      this->myTB6612FNGModule.Idle();
+  }
+  else
+  {
+    std::cout << "\nThe ThunderRobot is on the edge, moving backward\n";
+    this->myTB6612FNGModule.Backward(speed,500);
+  }
+}
+
+/*
+  Interface method to turn the robot left / right
+  @param string movement: The desired direction
+  @param int speed: The desired speed (0,100) with <50> as default value.
+  @param int duration:  The desired duration in milliseconds with <1000> as
+                        default value.
+*/
+void ThunderRobot::Move (std::string movement, int speed, int duration)
+{
+  // Check the distance to ground
+  if (this->GetDistanceToGround() < 7.5)
+  {
+    // Turn the robot
+    if (movement == "left")
     {
       std::cout << "\nTurning the robot to left with a speed of: " 
                 << speed << "\% " << "by: " << duration << " ms\n";
@@ -183,12 +206,56 @@ void ThunderRobot::Turn90Degrees( std::string direction)
   if (direction == "left")
   {
     std::cout << "\nTurning the robot 90° to left\n";
-    this->myTB6612FNGModule.TurnLeft(100,3200);
+    this->myTB6612FNGModule.TurnLeft(100,3100);
   }
   else if (direction == "right")
   {
     std::cout << "\nTurning the robot 90° to right\n";
-    this->myTB6612FNGModule.TurnRight(100,3000);
+    this->myTB6612FNGModule.TurnRight(100,3300);
+  }
+  else
+  {
+    this->myTB6612FNGModule.Idle();
+  }
+}
+
+/*
+  Interface method to turn 45° degrees the robot to the left or right
+  @param string direction: The desired turn direction
+*/
+void ThunderRobot::Turn45Degrees( std::string direction)
+{
+  if (direction == "left")
+  {
+    std::cout << "\nTurning the robot 45° to left\n";
+    this->myTB6612FNGModule.TurnLeft(100,1550);
+  }
+  else if (direction == "right")
+  {
+    std::cout << "\nTurning the robot 45° to right\n";
+    this->myTB6612FNGModule.TurnRight(100,1650);
+  }
+  else
+  {
+    this->myTB6612FNGModule.Idle();
+  }
+}
+
+/*
+  Interface method to turn 30° degrees the robot to the left or right
+  @param string direction: The desired turn direction
+*/
+void ThunderRobot::Turn30Degrees( std::string direction)
+{
+  if (direction == "left")
+  {
+    std::cout << "\nTurning the robot 45° to left\n";
+    this->myTB6612FNGModule.TurnLeft(100,1030);
+  }
+  else if (direction == "right")
+  {
+    std::cout << "\nTurning the robot 45° to right\n";
+    this->myTB6612FNGModule.TurnRight(100,1100);
   }
   else
   {
