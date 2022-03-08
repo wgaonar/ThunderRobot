@@ -43,17 +43,20 @@ public:
   // Interface method to move the robot to forward / backward
   virtual void Move (std::string movement, int speed = 50, int duration = 1000);
 
-  // Interface method to move the robot to forward
+  // Interface method to move the robot 10cm to forward / backward
+  virtual void Move10cm (std::string movement);
+
+  // Interface method to turn the robot to the left / right
   virtual void Turn (std::string movement, int speed = 50, int duration = 1000);
 
   // Interface method to turn 90 degrees the robot
-  virtual void Turn90Degrees( std::string direction);
+  virtual void Turn90Degrees(std::string direction);
 
   // Interface method to turn 45 degrees the robot
-  virtual void Turn45Degrees( std::string direction);
+  virtual void Turn45Degrees(std::string direction);
 
   // Interface method to turn 30 degrees the robot
-  virtual void Turn30Degrees( std::string direction);
+  virtual void Turn30Degrees(std::string direction);
 
   // Destructor
   ~ThunderRobot();
