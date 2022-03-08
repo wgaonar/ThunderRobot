@@ -193,6 +193,36 @@ void ThunderRobot::Move10cm (std::string movement)
 }
 
 /*
+  Interface method to move the robot 5cm forward / backward
+  @param string movement: The desired direction
+*/
+void ThunderRobot::Move5cm (std::string movement)
+{
+  // Check the distance to ground
+  if (this->GetDistanceToGround() < 7.5)
+  {
+    // Move the robot
+    if (movement == "forward")
+    {
+      std::cout << "\nMoving the robot 5cm to forward\n";
+      this->myTB6612FNGModule.Forward(100, 750);
+    }
+    else if (movement == "backward")
+    {
+      std::cout << "\nMoving the robot 5cm to backward\n";
+      this->myTB6612FNGModule.Backward(100, 800);
+    }
+    else
+      this->myTB6612FNGModule.Idle();
+  }
+  else
+  {
+    std::cout << "\nThe ThunderRobot is on the edge, moving backward\n";
+    this->myTB6612FNGModule.Backward(100,500);
+  }
+}
+
+/*
   Interface method to turn the robot to the left / right
   @param string movement: The desired direction
   @param int speed: The desired speed (0,100) with <50> as default value.

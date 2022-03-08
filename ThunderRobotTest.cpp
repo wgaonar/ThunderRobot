@@ -60,7 +60,14 @@ int main()
   }
   */
 
-
+  for (size_t i = 0; i < 4; i++)
+  {
+    myRobot.Move5cm("forward");
+    DelayMilliseconds (200);
+    myRobot.Move5cm("backward");
+    DelayMilliseconds (200);
+  }
+  
   myRobot.Turn90Degrees("left");
   DelayMilliseconds (1000);
 

@@ -46,6 +46,9 @@ public:
   // Interface method to move the robot 10cm to forward / backward
   virtual void Move10cm (std::string movement);
 
+  // Interface method to move the robot 5cm to forward / backward
+  virtual void Move5cm (std::string movement);
+
   // Interface method to turn the robot to the left / right
   virtual void Turn (std::string movement, int speed = 50, int duration = 1000);
 
