@@ -117,7 +117,7 @@ int main()
   for (size_t i = 0; i < 5; i++)
     myRobot.Move10cm("forward");
 
-  message = "Main program finishes here...";
+  message = "Main program finishes here Bye Bye...";
   cout << RainbowText(message,"Blue", "White","Bold") << endl;
 
   return 0;
