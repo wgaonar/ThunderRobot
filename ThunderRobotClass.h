@@ -3,7 +3,7 @@
 
 #include "../../Programs/BeagleCPP/Sources/HC_SR04.h"
 #include "../../Programs/BeagleCPP/Sources/KEYPAD_5BUTTONS.h"
-#include "../../Programs/BeagleCPP/Sources/TB6612FNG.h"
+#include "../../Programs/BeagleCPP/Sources/L298N.h"
 #include "../../Programs/BeagleCPP/Sources/POSITION_SERVO.h"
 
 class ThunderRobot
@@ -15,7 +15,7 @@ private:
   KEYPAD_5BUTTONS myKeyPad;
 
   // Actuators
-  TB6612FNG myTB6612FNGModule;
+  L298N myL298NModule;
   POSITION_SERVO mySG90Servo;
 
 public:

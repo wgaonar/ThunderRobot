@@ -23,15 +23,11 @@ COMMAND command = NOT_IDENTIFIED;
 std::vector<COMMAND> movements;
 /*===========================================================================*/
 
-/*======================TB6612FNG DRIVER SETUP===============================*/
-// Declare the pin to activate / deactivate the TB6612FNG module
-GPIO standByPin {P8_16};
-
+/*======================L298N DRIVER SETUP===============================*/
 // Declaring the pins for motor A 
 GPIO AIN1 {P8_12};
 GPIO AIN2 {P8_14};
 PWM PWMA {P8_13};
-
 // Declare the MotorA
 DCMotor MotorLeft {AIN1, AIN2, PWMA, true};
 
@@ -39,12 +35,11 @@ DCMotor MotorLeft {AIN1, AIN2, PWMA, true};
 GPIO BIN1 {P8_17};
 GPIO BIN2 {P8_18};
 PWM PWMB {P8_19};
-
 // Declare the MotorB
 DCMotor MotorRight {BIN1, BIN2, PWMB};
 
-// Declare the TB6612FNG Module
-TB6612FNG myTB6612FNGModule (MotorLeft, MotorRight, standByPin);
+// Declare the L298N Module
+// L298N myL298NModule (MotorLeft, MotorRight);
 /*===========================================================================*/
 
 /*=========================POSITION_SERVO SETUP==============================*/
@@ -56,11 +51,9 @@ ThunderRobot::ThunderRobot() :
   distanceSensorToGround {triggerPin_SensorA, echoPin_SensorA},
   distanceSensorToFront {triggerPin_SensorB, echoPin_SensorB},
   myKeyPad {VoutPin, blueLedPin, redLedPin, yellowLedPin, greenLedPin},
-  myTB6612FNGModule {MotorLeft, MotorRight, standByPin},
+  myL298NModule {MotorLeft, MotorRight},
   mySG90Servo {pwmServoPin}
 {
-  // Activate the module
-  this->myTB6612FNGModule.Activate();
   DelayMilliseconds(1000);
 }
 
@@ -144,21 +137,21 @@ void ThunderRobot::Move (std::string movement, int speed, int duration)
     {
       std::cout << "\nMoving the Robot to forward with a speed of: " 
                 << speed << "\% " << "by: " << duration << " ms\n";
-      this->myTB6612FNGModule.Forward(speed, duration);
+      this->myL298NModule.Forward(speed, duration);
     }
     else if (movement == "backward")
     {
       std::cout << "\nMoving the robot to backward with a speed of: " 
                 << speed << "\% " << "by: " << duration << " ms\n";
-      this->myTB6612FNGModule.Backward(speed, duration);
+      this->myL298NModule.Backward(speed, duration);
     }
     else
-      this->myTB6612FNGModule.Idle();
+      this->myL298NModule.Idle();
   }
   else
   {
     std::cout << "\nThe ThunderRobot is on the edge, moving backward\n";
-    this->myTB6612FNGModule.Backward(speed,500);
+    this->myL298NModule.Backward(speed,500);
   }
 }
 
@@ -175,20 +168,20 @@ void ThunderRobot::Move10cm (std::string movement)
     if (movement == "forward")
     {
       std::cout << "\nMoving the robot 10cm to forward\n";
-      this->myTB6612FNGModule.Forward(100, 1500);
+      this->myL298NModule.Forward(100, 1500);
     }
     else if (movement == "backward")
     {
       std::cout << "\nMoving the robot 10cm to backward\n";
-      this->myTB6612FNGModule.Backward(100, 1600);
+      this->myL298NModule.Backward(100, 1600);
     }
     else
-      this->myTB6612FNGModule.Idle();
+      this->myL298NModule.Idle();
   }
   else
   {
     std::cout << "\nThe ThunderRobot is on the edge, moving backward\n";
-    this->myTB6612FNGModule.Backward(100,500);
+    this->myL298NModule.Backward(100,500);
   }
 }
 
@@ -205,20 +198,20 @@ void ThunderRobot::Move5cm (std::string movement)
     if (movement == "forward")
     {
       std::cout << "\nMoving the robot 5cm to forward\n";
-      this->myTB6612FNGModule.Forward(100, 750);
+      this->myL298NModule.Forward(100, 750);
     }
     else if (movement == "backward")
     {
       std::cout << "\nMoving the robot 5cm to backward\n";
-      this->myTB6612FNGModule.Backward(100, 800);
+      this->myL298NModule.Backward(100, 800);
     }
     else
-      this->myTB6612FNGModule.Idle();
+      this->myL298NModule.Idle();
   }
   else
   {
     std::cout << "\nThe ThunderRobot is on the edge, moving backward\n";
-    this->myTB6612FNGModule.Backward(100,500);
+    this->myL298NModule.Backward(100,500);
   }
 }
 
@@ -239,21 +232,21 @@ void ThunderRobot::Turn (std::string movement, int speed, int duration)
     {
       std::cout << "\nTurning the robot to left with a speed of: " 
                 << speed << "\% " << "by: " << duration << " ms\n";
-      this->myTB6612FNGModule.TurnLeft(speed,duration);
+      this->myL298NModule.TurnLeft(speed,duration);
     }
     else if (movement == "right")
     {
       std::cout << "\nTurning the robot to right with a speed of: " 
                 << speed << "\% " << "by: " << duration << " ms\n";
-      this->myTB6612FNGModule.TurnRight(speed,duration);
+      this->myL298NModule.TurnRight(speed,duration);
     }
     else
-      this->myTB6612FNGModule.Idle();
+      this->myL298NModule.Idle();
   }
   else
   {
     std::cout << "\nThe ThunderRobot is on the edge, moving backward\n";
-    this->myTB6612FNGModule.Backward(speed,500);
+    this->myL298NModule.Backward(speed,500);
   }
 }
 
@@ -266,16 +259,16 @@ void ThunderRobot::Turn90Degrees( std::string direction)
   if (direction == "left")
   {
     std::cout << "\nTurning the robot 90° to left\n";
-    this->myTB6612FNGModule.TurnLeft(100,3100);
+    this->myL298NModule.TurnLeft(100,3100);
   }
   else if (direction == "right")
   {
     std::cout << "\nTurning the robot 90° to right\n";
-    this->myTB6612FNGModule.TurnRight(100,3300);
+    this->myL298NModule.TurnRight(100,3300);
   }
   else
   {
-    this->myTB6612FNGModule.Idle();
+    this->myL298NModule.Idle();
   }
 }
 
@@ -288,16 +281,16 @@ void ThunderRobot::Turn45Degrees( std::string direction)
   if (direction == "left")
   {
     std::cout << "\nTurning the robot 45° to left\n";
-    this->myTB6612FNGModule.TurnLeft(100,1550);
+    this->myL298NModule.TurnLeft(100,1550);
   }
   else if (direction == "right")
   {
     std::cout << "\nTurning the robot 45° to right\n";
-    this->myTB6612FNGModule.TurnRight(100,1650);
+    this->myL298NModule.TurnRight(100,1650);
   }
   else
   {
-    this->myTB6612FNGModule.Idle();
+    this->myL298NModule.Idle();
   }
 }
 
@@ -310,22 +303,18 @@ void ThunderRobot::Turn30Degrees( std::string direction)
   if (direction == "left")
   {
     std::cout << "\nTurning the robot 45° to left\n";
-    this->myTB6612FNGModule.TurnLeft(100,1050);
+    this->myL298NModule.TurnLeft(100,1050);
   }
   else if (direction == "right")
   {
     std::cout << "\nTurning the robot 45° to right\n";
-    this->myTB6612FNGModule.TurnRight(100,1100);
+    this->myL298NModule.TurnRight(100,1100);
   }
   else
   {
-    this->myTB6612FNGModule.Idle();
+    this->myL298NModule.Idle();
   }
 }
 
 // Destructor
-ThunderRobot::~ThunderRobot() 
-{
-  // Deactivate the module
-  this->myTB6612FNGModule.Deactivate();
-}
+ThunderRobot::~ThunderRobot() {}
