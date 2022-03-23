@@ -23,7 +23,7 @@ int main()
   cout << "Distance to ground: " << distanceToGround << "cm\n";
   DelayMilliseconds(250);
 
-  /*
+  
   cout << "\nMeasuring the distance to front\n";
   double distanceToFront= myRobot.GetDistanceToFront();
   cout << "Distance to front: " << distanceToFront << "cm\n";
@@ -38,27 +38,19 @@ int main()
   double distanceToLeft= myRobot.GetDistanceToLeft();
   cout << "Distance to left: " << distanceToLeft << "cm\n";
   DelayMilliseconds(250);
-  */
+  
 
   // Test the robot movements
   cout << "\nMoving the ThunderRobot...\n";
 
   int motorSpeed {100};
-  /*
+ 
   myRobot.Move("forward", motorSpeed, 1000);
   myRobot.Move("backward", motorSpeed, 1000);
   
   myRobot.Turn("left", motorSpeed, 1000);
   myRobot.Turn("right", motorSpeed, 1000);
-  */
-
-  /*
-  for (size_t i = 0; i < 4; i++)
-  {
-    myRobot.Move10cm("forward");
-    myRobot.Move10cm("backward");
-  }
-  */
+  
 
   for (size_t i = 0; i < 4; i++)
   {
